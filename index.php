@@ -19,12 +19,12 @@ include'function/function.php';?>
 </head>
 <body>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="login-form">
     <div class="col-md-6">
         <div class="login-form-input">
-          <h4 class="text-center login">LOGIN</h4>
+          <h4 class="text-center login">LOGIN DULU BRO..</h4>
           <br><br>
 
           <?php
@@ -38,13 +38,13 @@ include'function/function.php';?>
                 session_start();
                 $_SESSION["LEVEL"] = $row["LEVEL"];
                 $_SESSION['username'] = $username;
-                header("location: ../admin/dasboard.php");
+                header("location: admin/dasboard.php");
                 exit;
               }
               elseif ($row["LEVEL"] == "kasir") {
                 session_start();
                 $_SESSION['username'] = $username;
-                header("location: ../kasir/dasboard.php");
+                header("location: admin/dasboard.php");
                 exit;
               }
 
@@ -63,10 +63,20 @@ include'function/function.php';?>
 
           <form class="login" action="" method="post">
           <label for="usr">Username :</label>
-          <input type="text" class="form-control" name="username" placeholder="username" autocomplete="off" required>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-user"></i></div>
+                </div>
+                <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required>
+              </div>
           <br>
           <label for="usr">Password :</label>
-          <input type="password" class="form-control" name="password" placeholder="password" autocomplete="off" required>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fas fa-unlock"></i></div>
+            </div>
+            <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required>
+          </div>
           <br>
           <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
           </form>

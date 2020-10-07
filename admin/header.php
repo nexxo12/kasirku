@@ -4,14 +4,14 @@ session_start();
 //cek sudah login?
 $user = $_SESSION['username'];
 if (!isset($_SESSION['username'])) {
-    header("location: ../support/login.php");
+    header("location: ../index.php");
 }
 $hasil = mysqli_query($conn, "SELECT *  FROM login WHERE USERNAME = '$user'");
 $row = mysqli_fetch_assoc($hasil);
 
 if (isset($_SESSION["LEVEL"]) != "super") {
     session_destroy();
-    header("location: ../support/login.php");
+    header("location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -21,21 +21,21 @@ if (isset($_SESSION["LEVEL"]) != "super") {
   <title>Dasboard - VSComp</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/datatables.min.css">
-  <link rel="stylesheet" href="../css/datepicker.css">
-  <link rel="stylesheet" href="../fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="../css/admin.css?v=1.0">
-  <script src="../js/jquery-3.5.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../fontawesome/js/all.min.js"></script>
-  <script src="../js/sweetalert.min.js"></script>
-  <script src="../js/datatables.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/Chart.bundle.min.js"></script>
-  <script src="../js/count.js"></script>
-  <script src="../ckeditor/ckeditor.js"></script>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/datatables.min.css">
+  <link rel="stylesheet" href="../assets/css/datepicker.css">
+  <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/admin.css?v=1.0">
+  <script src="../assets/js/jquery-3.5.1.min.js"></script>
+  <script src="../assets/js/popper.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/fontawesome/js/all.min.js"></script>
+  <script src="../assets/js/sweetalert.min.js"></script>
+  <script src="../assets/js/datatables.min.js"></script>
+  <script src="../assets/js/bootstrap-datepicker.js"></script>
+  <script src="../assets/js/Chart.bundle.min.js"></script>
+  <script src="../assets/js/count.js"></script>
+  <script src="../assets/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
