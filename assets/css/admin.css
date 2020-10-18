@@ -93,11 +93,6 @@ a.dropdown-item{
   top:1.5%;
 }
 
-.paket-pc{
-  position: absolute;
-  left:36%;
-  top:17.8%;
-}
 
 .space{
   position: relative;
@@ -133,9 +128,9 @@ textarea {
 }
 
 .kategori{
-  position: absolute;
-  left:42.6%;
-  top:17.8%;
+  position: relative;
+  left: 27%;
+  margin-top: -3.3%;
 }
 
 

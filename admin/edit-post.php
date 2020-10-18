@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -27,11 +27,9 @@
       <a class="nav-link" id="profile-tab" href="garansi.php" role="tab" aria-controls="garansi" aria-selected="false"><i class="fas fa-history mr-2"></i>Garansi</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" id="profile-tab" href="news.php" role="tab" aria-controls="news" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>News</a>
+      <a class="nav-link" id="profile-tab" href="laporan.php" role="tab" aria-controls="laporan" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>Laporan</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" href="promo.php" role="tab" aria-controls="promo" aria-selected="false"><i class="fas fa-percentage mr-2"></i>Promo</a>
-    </li>
+
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">tampilan dasboard</div>

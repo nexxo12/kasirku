@@ -27,10 +27,7 @@
       <a class="nav-link" id="profile-tab" href="garansi.php" role="tab" aria-controls="garansi" aria-selected="false"><i class="fas fa-history mr-2"></i>Garansi</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" href="news.php" role="tab" aria-controls="news" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>News</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" href="promo.php" role="tab" aria-controls="promo" aria-selected="false"><i class="fas fa-percentage mr-2"></i>Promo</a>
+      <a class="nav-link" id="profile-tab" href="laporan.php" role="tab" aria-controls="laporan" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>Laporan</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -51,9 +48,6 @@
             </tr>
         </table>
       </form>
-      <div class="paket-pc">
-        <a href="paket-pc.php"><button class="btn btn-success" type="submit" name="paket_pc"><i class="fas fa-cog mr-2"></i>Paket PC</button></a>
-      </div>
       <form class="" action="" method="POST">
       <div class="kategori">
         <button class="btn btn-success" type="submit" name="kategori"><i class="fas fa-plus mr-2"></i>Kategori</button>

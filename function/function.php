@@ -2,7 +2,7 @@
 <?php
 //untuk konek database
   date_default_timezone_set('Asia/Jakarta');
- $conn= mysqli_connect ("localhost","root","","coba_penjualan");
+ $conn= mysqli_connect ("localhost","root","","vsstore");
  if($conn){
    echo "";
  }
@@ -179,26 +179,6 @@ function tambahdata($data){
   }
 }
 
-function tambahpaketPC($data){
-  global $conn;
-  $proc = $data["proc"];
-  $mobo = $data["mobo"];
-  $ram = $data["ram"];
-  $hdd = $data["hdd"];
-  $ssd = $data["ssd"];
-  $vga = $data["vga"];
-  $psu = $data["psu"];
-  $casing = $data["casing"];
-  $monitor = $data["monitor"];
-  $keyb = $data["keyb"];
-  $mouse = $data["mouse"];
-  $speak = $data["speaker"];
-  $harga = $data["hargapc"];
-  $tgl = $data["tgl"];
-  $query = "INSERT INTO paket_pc VALUES('','$harga','$tgl','$proc','$mobo','$ram','$hdd','$ssd','$vga','$psu','$casing','$monitor','$keyb','$mouse','$speak')";
-  $hasil = mysqli_query ($conn,$query);
-  return $hasil;
-}
 
 function tambahkategori($data){
   global $conn;
@@ -218,171 +198,6 @@ function tambahdata_supp($data){
     $hasil = mysqli_query ($conn,$query);
     return $hasil;
   }
-
-
-  function upload_gambar(){
-    //menganmbil isi array dari $_FILES
-    $namaFile = $_FILES["gambar"]["name"]; //nama file
-    $sizeFile = $_FILES["gambar"]["size"]; //ukuran file
-    $errFile = $_FILES["gambar"]["error"]; //error file, jika yg diupload bukan gambar
-    $tmpFile = $_FILES["gambar"]["tmp_name"]; //tempat penyimpana gambar
-
-    //cek gambar diupload / tidak
-    if ($errFile == 4) {
-      echo "<script language=\"javascript\">
-      swal({
-            title: \"Warning!\",
-            text: \"Gambar wajib diupload..!\",
-            icon: \"warning\",
-            button: \"OK\",
-          });
-
-      </script>";
-      return false;
-    }
-
-    //cek tipe file yang diupload
-    $TYPEektensionFile = ['jpg', 'jpeg', 'bmp', 'png', 'svg', 'gif'];
-    $GETektensionFile = explode('.', $namaFile); // memecah string berupa array (explode) ex: blabla.jpg > 'blabla''jpg'
-    $GETektensionFile = strtolower(end($GETektensionFile)); // (end) mengambil kata yang paling akhir, (strtolower) membuat semua huruf kecil
-    if (!in_array($GETektensionFile, $TYPEektensionFile)) { //in_array untuk mengecek string didalam array
-      echo "<script language=\"javascript\">
-      swal({
-            title: \"Warning!\",
-            text: \"Supported Image (jpg, jpeg, bmp, png, svg, gif)\",
-            icon: \"warning\",
-            button: \"OK\",
-          });
-
-      </script>";
-      return false;
-    }
-
-    //cek ukuran Gambar
-    if ($sizeFile > 2000000) {
-      echo "<script language=\"javascript\">
-      swal({
-            title: \"Warning!\",
-            text: \"Maximum File Upload 2MB..!!\",
-            icon: \"warning\",
-            button: \"OK\",
-          });
-
-      </script>";
-      return false;
-    }
-
-    //generate nama gambar random
-    $namaFileRandom = uniqid();
-    $namaFileRandom .= '.';
-    $namaFileRandom .= $GETektensionFile;
-
-    //lolos pengecekan gambar, lalu upload
-    move_uploaded_file($tmpFile, '../img/news/' .$namaFileRandom);
-    return $namaFileRandom;
-  }
-
-    // lanjutan di function bawah
-
-  function tambahposting($data){
-      global $conn;
-      $judul = htmlspecialchars($data["judul"]);
-      //$gambar = htmlspecialchars($data["gambar"]);
-      $isi = htmlspecialchars($data["isi"]);
-      $tgltime = $data["tanggal-waktu"];
-
-      //upload gambar
-      $gambar = upload_gambar();
-      if (!$gambar) { //jika gagal (trus / false)
-          return false;
-      }
-
-      $query = "INSERT INTO news VALUES ('','$judul','$gambar','$tgltime','$isi') ";
-      $hasil = mysqli_query ($conn,$query);
-      return $hasil;
-    }
-
-    function upload_gambar_promo(){
-      //menganmbil isi array dari $_FILES
-      $namaFile = $_FILES["gambar"]["name"]; //nama file
-      $sizeFile = $_FILES["gambar"]["size"]; //ukuran file
-      $errFile = $_FILES["gambar"]["error"]; //error file, jika yg diupload bukan gambar
-      $tmpFile = $_FILES["gambar"]["tmp_name"]; //tempat penyimpana gambar
-
-      //cek gambar diupload / tidak
-      if ($errFile == 4) {
-        echo "<script language=\"javascript\">
-        swal({
-              title: \"Warning!\",
-              text: \"Gambar wajib diupload..!\",
-              icon: \"warning\",
-              button: \"OK\",
-            });
-
-        </script>";
-        return false;
-      }
-
-      //cek tipe file yang diupload
-      $TYPEektensionFile = ['jpg', 'jpeg', 'bmp', 'png', 'svg', 'gif'];
-      $GETektensionFile = explode('.', $namaFile); // memecah string berupa array (explode) ex: blabla.jpg > 'blabla''jpg'
-      $GETektensionFile = strtolower(end($GETektensionFile)); // (end) mengambil kata yang paling akhir, (strtolower) membuat semua huruf kecil
-      if (!in_array($GETektensionFile, $TYPEektensionFile)) { //in_array untuk mengecek string didalam array
-        echo "<script language=\"javascript\">
-        swal({
-              title: \"Warning!\",
-              text: \"Supported Image (jpg, jpeg, bmp, png, svg, gif)\",
-              icon: \"warning\",
-              button: \"OK\",
-            });
-
-        </script>";
-        return false;
-      }
-
-      //cek ukuran Gambar
-      if ($sizeFile > 2000000) {
-        echo "<script language=\"javascript\">
-        swal({
-              title: \"Warning!\",
-              text: \"Maximum File Upload 2MB..!!\",
-              icon: \"warning\",
-              button: \"OK\",
-            });
-
-        </script>";
-        return false;
-      }
-
-      //generate nama gambar random
-      $namaFileRandom = uniqid();
-      $namaFileRandom .= '.';
-      $namaFileRandom .= $GETektensionFile;
-
-      //lolos pengecekan gambar, lalu upload
-      move_uploaded_file($tmpFile, '../img/promo/' .$namaFileRandom);
-      return $namaFileRandom;
-    }
-
-      // lanjutan di function bawah
-
-    function tambahpromo($data){
-        global $conn;
-        $judul = htmlspecialchars($data["judul"]);
-        //$gambar = htmlspecialchars($data["gambar"]);
-        $isi = htmlspecialchars($data["isi"]);
-        $tgltime = $data["tanggal-waktu"];
-
-        //upload gambar
-        $gambar = upload_gambar_promo();
-        if (!$gambar) { //jika gagal (trus / false)
-            return false;
-        }
-
-        $query = "INSERT INTO promo VALUES ('','$judul','$gambar','$tgltime','$isi') ";
-        $hasil = mysqli_query ($conn,$query);
-        return $hasil;
-      }
 
 
 
@@ -480,29 +295,6 @@ function editbarang($data){// value $data diterima dari edit-barang.php berupa $
 
 }
 
-function editPaketPC($data){// value $data diterima dari edit-barang.php berupa $_POST
-  global $conn;
-  $id = $data["id_pc"];
-  $proc = $data["proc"];
-  $mobo = $data["mobo"];
-  $ram = $data["ram"];
-  $hdd = $data["hdd"];
-  $ssd = $data["ssd"];
-  $vga = $data["vga"];
-  $psu = $data["psu"];
-  $casing = $data["casing"];
-  $monitor = $data["monitor"];
-  $keyb = $data["keyb"];
-  $mouse = $data["mouse"];
-  $speak = $data["speaker"];
-  $harga = $data["hargapc"];
-  $query = "UPDATE paket_pc SET HARGA_PC = '$harga', PROC = '$proc', MOBO = '$mobo', RAM = '$ram', HDD = '$hdd', SSD = '$ssd', VGA = '$vga', PSU = '$psu',
-                                CASING = '$casing', MONITOR = '  $monitor', KEYB = '$keyb',  MOUSE = '$mouse', SPEAK = '$speak' WHERE ID_PC = '$id' ;";
-  $hasil = mysqli_query ($conn,$query);
-  return $hasil;
-
-
-}
 
 function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_POST
   global $conn;
@@ -532,53 +324,7 @@ function editprofile($data){// value $data diterima dari edit-suppier.php berupa
 
 }
 
-function editpost($data){// value $data diterima dari edit-suppier.php berupa $_POST
-  global $conn;
-  $id_news = $data["id_news"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
-  $judul = htmlspecialchars($data["judul"]);
-  $gambarOld = $data["old_gambar"];
-  $isi = htmlspecialchars($data["isi"]);
-  $tgltime = $data["tanggal-waktu"];
 
-  //cek user pilih gambar baru / tidak
-  if ($_FILES["gambar"]["error"] == 4) {
-      $gambar = $gambarOld;
-  }
-  else {
-      $gambar = upload_gambar();
-  }
-
-
-  $query = "UPDATE news SET JUDUL = '$judul', GAMBAR = '$gambar', WAKTU = '$tgltime', ISI = '$isi' WHERE ID_NEWS = $id_news";
-  $hasil = mysqli_query ($conn,$query);
-  return $hasil;
-
-
-}
-
-function editpromo($data){// value $data diterima dari edit-suppier.php berupa $_POST
-  global $conn;
-  $id_promo = $data["id_promo"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
-  $judul = htmlspecialchars($data["judul"]);
-  $gambarOld = $data["old_gambar"];
-  $isi = htmlspecialchars($data["isi"]);
-  $tgltime = $data["tanggal-waktu"];
-
-  //cek user pilih gambar baru / tidak
-  if ($_FILES["gambar"]["error"] == 4) {
-      $gambar = $gambarOld;
-  }
-  else {
-      $gambar = upload_gambar_promo();
-  }
-
-
-  $query = "UPDATE promo SET JUDUL = '$judul', GAMBAR = '$gambar', WAKTU = '$tgltime', ISI = '$isi' WHERE ID_PROMO = $id_promo";
-  $hasil = mysqli_query ($conn,$query);
-  return $hasil;
-
-
-}
 
 function editcust($data){// value $data diterima dari edit-suppier.php berupa $_POST
   global $conn;
@@ -630,6 +376,14 @@ return tampil_data($query);
 
 function carigaransi($cari){
 $query = "SELECT * FROM garansi WHERE INV_PENJUALAN ='$cari'";
+return tampil_data($query);
+
+}
+
+function carilaporan($request){
+$tgl_awal = $request["tgl_awal"];
+$tgl_akhir = $request["tgl_akhir"];
+$query = "SELECT * FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'";
 return tampil_data($query);
 
 }
