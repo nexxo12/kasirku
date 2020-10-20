@@ -42,7 +42,7 @@ if (isset($_SESSION["LEVEL"]) != "super") {
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top primary-nav" id="nav">
     <div class="container-fluid">
     <a class="navbar-brand" href="dasboard.php">
-    <img src="../img/LOGO+TEXT.png" alt="Logo" id="logo"></img>
+    <img src="../img/logo1.png" alt="Logo" id="logo"></img>
     <h3 style="display:inline; margin-top:30%">Admin Page</h3>
     </a>
    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

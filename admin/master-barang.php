@@ -42,7 +42,7 @@
           <form class="" action="" method="POST">
           <table class="tambah-data">
             <tr>
-              <td><input class="form-control input-jumlahdata" type="text" placeholder="Jumlah Data" name="jumlah" required></td>
+              <td><input class="form-control" type="text" placeholder="Jumlah Data" name="jumlah" required autofocus></td>
               <td><button class="btn btn-success btn-tambah" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button></a></td>
 
             </tr>

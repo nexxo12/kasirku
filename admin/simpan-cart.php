@@ -17,7 +17,16 @@ if(isset($_POST["id_pjforinv"])){
    $h_awal = $_POST["harga_awal"];
    $jumlah = $_POST["jumlah"];
    $h_jual = $_POST["harga_jual"];
-   $query = "INSERT INTO list_penjualan VALUES ('$id_list','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total') ";
+
+   $laba = ($h_jual - $h_awal) * $jumlah;
+   if ($h_jual == 0) {
+     $laba = 0;
+     $query = "INSERT INTO list_penjualan VALUES ('$id_list','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total','$laba') ";
+   }
+   else {
+
+     $query = "INSERT INTO list_penjualan VALUES ('$id_list','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total','$laba') ";
+   }
    $hasil = mysqli_query ($conn,$query);
    if ($hasil > 0) {
      echo "";

@@ -50,26 +50,30 @@
           <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_akhir" autocomplete="off" required>
           <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
         </form>
+
         <br>
         <?php
-          if (isset($_POST["cari"])) {
+            if (isset($_POST["cari"])) {
 
-        ?>
-
+         ?>
+        <div style="overflow-x:auto;">
+          <h5 class="text-center">Data periode <?=$_POST["tgl_awal"]  ?> s/d <?=$_POST["tgl_akhir"]  ?></h5>
+        <a href="print-report.php?start=<?=$_POST["tgl_awal"]  ?>&end=<?=$_POST["tgl_akhir"]  ?>" target="_blank"><button class="btn btn-info mb-2" type="submit" name="cari"><i class="fas fa-print"></i></button></a>
         <table class="table table-bordered ">
           <thead class="thead-dark text-center">
             <tr>
               <th scope="col" width="">Invoice</th>
               <th scope="col" width="">Barang</th>
-              <th scope="col" width="">Tanggal</th>
+              <th scope="col" width="10%">Tanggal</th>
               <th scope="col" width="">QTY</th>
-              <th scope="col" width="">Harga Awal</th>
+              <th scope="col" width="">Modal</th>
               <th scope="col" width="">Harga Jual</th>
               <th scope="col" width="">Total</th>
               <th scope="col" width="">Laba</th>
             </tr>
           </thead>
           <?php
+
             $no=1;
             $data_laporan = tampil_data("SELECT * FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG ORDER BY INV_PENJUALAN ASC");
             $data_laporan = carilaporan($_POST);
@@ -81,41 +85,68 @@
                 <td><?= $laporan["NAMA_BARANG"]; ?></td>
                 <td align="center"><?= $laporan["TANGGAL_TRANSAKSI"]; ?></td>
                 <td align="center"><?= $laporan["JUMLAH_BELI"]; ?></td>
-                <td align="center">Rp. <?= number_format($laporan["HARGA_AWAL"]); ?></td>
-                <td align="center">Rp. <?= number_format($laporan["HARGA_JUALPJ"]); ?></td>
-                <td align="center">Rp. <?= number_format($laporan["TOTAL_HARGA"]); ?></td>
-                <td align="center"><?php
-                  $laba = $laporan["HARGA_JUALPJ"] - $laporan["HARGA_AWAL"];
-                  $jml = $laporan["JUMLAH_BELI"];
-                  echo $laba * $laporan["JUMLAH_BELI"];
-                 ?>
-                </td>
+                <td align="center"><?= number_format($laporan["HARGA_AWAL"]); ?></td>
+                <td align="center"><?= number_format($laporan["HARGA_JUALPJ"]); ?></td>
+                <td align="center"><?= number_format($laporan["TOTAL_HARGA"]); ?></td>
+                <td align="center"><?= number_format($laporan["LABAPJ"]); ?></td>
               </tr>
             </tbody>
           <?php $no++; endforeach; ?>
-          <tfoot>
+          <tfoot class="text-center">
             <tr>
-              <td colspan="3">Jumlah</td>
+              <td colspan="3"><h5>Grand Total</h5></td>
               <td><?php
                 $tgl_awal = $_POST["tgl_awal"];
                 $tgl_akhir = $_POST["tgl_akhir"];
                 $data_laporan = tampil_data("SELECT SUM(JUMLAH_BELI) as qty FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
                 foreach ($data_laporan as $qty) {
-                      $total_harga = $qty["qty"];
-                      echo $total_harga;
+                      $total_qty = $qty["qty"];
+                      echo "<strong>".$total_qty;
                 }
               ?></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>
+                <?php
+                  $data_laporan = tampil_data("SELECT SUM(HARGA_AWAL) as hg_awal FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_laporan as $awal) {
+                        $awal_harga = $awal["hg_awal"];
+                        echo "<strong>".number_format( $awal_harga);
+                  }
+                ?>
+              </td>
+              <td>
+                <?php
+                  $data_laporan = tampil_data("SELECT SUM(HARGA_JUALPJ) as hg_jual FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_laporan as $jual) {
+                        $jual_harga = $jual["hg_jual"];
+                        echo "<strong>".number_format( $jual_harga);
+                  }
+                ?>
+              </td>
+              <td>
+                <?php
+                  $data_laporan = tampil_data("SELECT SUM(TOTAL_HARGA) as hg_total FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_laporan as $total) {
+                        $total_harga = $total["hg_total"];
+                        echo "<strong>".number_format($total_harga);
+                  }
+                ?>
+              </td>
+              <td>
+                <?php
+                  $data_laporan = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_laporan as $laba) {
+                        $laba_harga = $laba["laba"];
+                        echo "<strong>".number_format($laba_harga);
+                  }
+                ?>
+              </td>
             </tr>
           </tfoot>
         </table>
         <?php
           }
          ?>
-
+         </div>
     </div>
 
     </div> <!-- end news -->
