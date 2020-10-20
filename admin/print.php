@@ -23,16 +23,16 @@
 
   <table width="100%" border="0">
     <tr>
-      <td rowspan="3" width="12%"><img src="../img/LogoWEBV2.png" alt="" style="height:130px; width:130px;"></td>
-      <td width="35%">
-        <h3>VSComputer</h3>
-        <i class="fas fa-map-marker-alt mr-2"></i>Bendul merisi permai Blok D no. D9 - Surabaya
+      <td rowspan="3" width="10%"><img src="../img/logo.png" alt="" style="height:130px; width:160px;"></td>
+      <td width="33%">
+        <h3>VSComputer Online</h3>
+        <i class="fas fa-store mr-1"></i>tokopedia.com/vinoriousstore
       </td>
       <td></td>
       <td><h5>INVOICE : <?=$inv["INV_PENJUALAN"]; ?></h5><strong><?=$inv["NAMA"]; ?></strong></td>
     </tr>
     <tr>
-      <td><i class="fas fa-envelope-square mr-2"></i>ravinorahman@gmail.com</td>
+      <td><i class="fas fa-store mr-1"></i>bukalapak.com/u/ravinorahman</td>
       <td></td>
       <td>Alamat : <?=$inv["ALAMAT"]; ?></td>
     </tr>
@@ -49,48 +49,64 @@
     </tr>
 
   </table>
-<br>
-<table class="table table-border" align="center">
-  <thead>
-    <tr>
-      <th scope="col" width="5%">No.</th>
-      <th scope="col">Nama Barang</th>
-      <th scope="col" width="18%">Harga (Rp.)</th>
-      <th scope="col" width="7%" class="text-center">Jumlah</th>
-      <th scope="col" width="20%">Subtotal (Rp.)</th>
-    </tr>
-  </thead>
-    <tbody>
-      <?php $no=1; foreach ($data_pj as $inv) :?>
-          <tr>
-            <td align="center"><?=$no; ?></td>
-            <td><?=$inv["NAMA_BARANG"]; ?></td>
-            <td ><?=number_format($inv["HARGA_JUALPJ"]); ?></td>
-            <td align="center"><?=$inv["JUMLAH_BELI"]; ?></td>
-            <td><?=number_format($inv["TOTAL_HARGA"]); ?></td>
-          </tr>
-    </tbody>
-    <?php $no++; endforeach; ?>
-    <tfoot>
-      <!-- menampilkan total harga -->
-      <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM penjualan WHERE INV_PENJUALAN = '$invoice'");?>
-      <?php foreach ($sum_total as $jumlaht) {
-            $total_harga = number_format($jumlaht["jumlah"]);
-      } ?>
-      <!-- menampilkan total jumlah -->
-      <?php $sum_jumlah = tampil_data("SELECT SUM(JUMLAH_BELI) AS jumlah_beli FROM penjualan WHERE INV_PENJUALAN = '$invoice'");?>
-      <?php foreach ($sum_jumlah as $jumlaht) {
-            $total_beli = number_format($jumlaht["jumlah_beli"]);
-      } ?>
+  <br>
+  <table class="table table-border" align="center" border="0">
+    <thead>
       <tr>
-        <td colspan="2" class="bg-light"><h5>Catatan : </h5><p>- Garansi tidak berlaku apabila terjadi "Human Error"<br>
-                              - Barang yang dibeli tidak dapat dikembalikan/ditukar <br>
-                              - Untuk cek garansi, silahkan masukan invoice di Web pada menu "Warranty"</p></td>
-        <td><h4 style="text-align:right;">Grand Total : </h4></td>
-        <td align="center"><h4><?=$total_beli;  ?></h4></td>
-        <td><h4><?=$total_harga;  ?></h4></td>
+        <th scope="col" width="5%">No.</th>
+        <th scope="col">Nama Barang</th>
+        <th scope="col" width="18%">Harga (Rp.)</th>
+        <th scope="col" width="7%" class="text-center">Jumlah</th>
+        <th scope="col" width="20%">Subtotal (Rp.)</th>
       </tr>
-    </tfoot>
+    </thead>
+      <tbody>
+        <?php $no=1; foreach ($data_pj as $inv) :?>
+            <tr>
+              <td align="center"><?=$no; ?></td>
+              <td><?=$inv["NAMA_BARANG"]; ?></td>
+              <td ><?=number_format($inv["HARGA_JUALPJ"]); ?></td>
+              <td align="center"><?=$inv["JUMLAH_BELI"]; ?></td>
+              <td><?=number_format($inv["TOTAL_HARGA"]); ?></td>
+            </tr>
+      </tbody>
+      <?php $no++; endforeach; ?>
+
+        <!-- menampilkan total harga -->
+        <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM penjualan WHERE INV_PENJUALAN = '$invoice'");?>
+        <?php foreach ($sum_total as $jumlaht) {
+              $total_harga = number_format($jumlaht["jumlah"]);
+        } ?>
+        <!-- menampilkan total jumlah -->
+        <?php $sum_jumlah = tampil_data("SELECT SUM(JUMLAH_BELI) AS jumlah_beli FROM penjualan WHERE INV_PENJUALAN = '$invoice'");?>
+        <?php foreach ($sum_jumlah as $jumlaht) {
+              $total_beli = number_format($jumlaht["jumlah_beli"]);
+        } ?>
+        <tr>
+          <td colspan="2" rowspan="4" class="bg-light"><h5>Catatan : </h5><p>- Garansi tidak berlaku apabila terjadi "Human Error"<br>
+                                - Barang yang dibeli tidak dapat dikembalikan/ditukar</td>
+          <tr>
+            <td height="20%"><p style="text-align:right;">Diskon Rp. </p></td>
+            <td></td>
+            <td>0</td>
+          </tr>
+          <td><p style="text-align:right;">Subtotal Rp. </p></td>
+          <td align="center"><p><?=$total_beli;  ?></p></td>
+          <td><p><?=$total_harga;  ?></p></td>
+          <tr>
+            <td><div style="text-align:right; font-weight:bold;">Total Rp. </div></td>
+            <td align="center"><p style="font-weight:bold;"><?=$total_beli;  ?></p></td>
+            <td><p style="font-weight:bold;"><?=$total_harga;  ?></p></td>
+          </tr>
+        </tr>
+</table>
+<br><br>
+<table class="ttd"style="float:right;" border="0" width="50%">
+  <tr>
+    <td><div style="text-align:center;">Tanda terima</div><br><br><br><hr></td>
+    <td width="20%"></td>
+    <td><div style="text-align:center;">Hormat kami</div><br><br><br><hr></td>
+  </tr>
 </table>
 
 </div>

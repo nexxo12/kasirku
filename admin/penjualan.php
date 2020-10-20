@@ -121,14 +121,14 @@
       </td>
       <td width="10%"><div class="form-group">
       <label for="exampleInputEmail1"><b>Jumlah:</b></label>
-      <input class="form-control" type="text" name="jumlah" placeholder="" autocomplete="off" required>
+      <input class="form-control" type="number" name="jumlah" placeholder="" autocomplete="off" required>
       </div>
       </td>
       <td>
 
       <div class="form-group">
       <label for="exampleInputEmail1"><b>Harga Jual :</b></label>
-      <input class="form-control" type="text" name="harga_jual"  placeholder="" value="">
+      <input class="form-control" type="number" name="harga_jual"  placeholder="" value="">
       </div>
       </td>
 
