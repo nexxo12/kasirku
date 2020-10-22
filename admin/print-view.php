@@ -110,8 +110,10 @@
     <td><div style="text-align:center;">Hormat kami</div><br><br><br><hr></td>
   </tr>
 </table>
+<br>
+<footer>
 <button type="button" style="margin-left: 45%;" class="btn btn-primary" onclick="window.print();">Cetak</button>
-
+</footer>
 </div>
 
 <script type="text/javascript">

@@ -56,8 +56,8 @@
             if (isset($_POST["cari"])) {
 
          ?>
+         <h5 class="text-center">Data periode <?=$_POST["tgl_awal"]  ?> s/d <?=$_POST["tgl_akhir"]  ?></h5>
         <div style="overflow-x:auto;">
-          <h5 class="text-center">Data periode <?=$_POST["tgl_awal"]  ?> s/d <?=$_POST["tgl_akhir"]  ?></h5>
         <a href="print-report.php?start=<?=$_POST["tgl_awal"]  ?>&end=<?=$_POST["tgl_akhir"]  ?>" target="_blank"><button class="btn btn-info mb-2" type="submit" name="cari"><i class="fas fa-print"></i></button></a>
         <table class="table table-bordered ">
           <thead class="thead-dark text-center">
@@ -169,4 +169,5 @@
  });
 </script>
 </body>
+<?php include'footer.php';?>
 </html>

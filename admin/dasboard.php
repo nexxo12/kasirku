@@ -36,7 +36,7 @@
     <div class="row">
     <div class="col-md-4">
       <div class="card mb-3" style="max-width: 24rem;">
-      <div class="card-header bg-primary text-white"><h4>Total Pembelian</h4></div>
+      <div class="card-header bg-primary text-white"><h4>Total Pembelian <?php echo $tgl=date('M-Y'); ?></h4></div>
       <div class="card-body card-body-custom">
         <table>
           <tr>
@@ -54,7 +54,7 @@
     <div class="col-md-4">
 
       <div class="card mb-3" style="max-width: 24rem;">
-      <div class="card-header bg-danger text-white"><h4>Total Penjualan</h4></div>
+      <div class="card-header bg-danger text-white"><h4>Total Penjualan <?php echo $tgl=date('M-Y'); ?></h4></div>
       <div class="card-body card-body-custom">
         <table>
           <tr>
@@ -73,19 +73,21 @@
     <div class="col-md-4">
 
       <div class="card mb-3" style="max-width: 24rem;">
-      <div class="card-header bg-warning text-white"><h4>Total Produk</h4></div>
+      <div class="card-header bg-primary text-white"><h4>Total Laba <?php echo $tgl=date('M-Y'); ?></h4></div>
       <div class="card-body card-body-custom">
         <table>
           <tr>
             <?php
-            global $conn;
-            $hasil = mysqli_query ($conn,"SELECT * FROM master_barang");
-            $barang = mysqli_num_rows($hasil);
+            $tgl2=date('Y-m');
+            $data_laba = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");
+            foreach ($data_laba as $laba) {
+                  $laba_harga = number_format($laba["laba"]);
+            }
             ?>
-            <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$barang; ?>" data-count-speed="80"></h1></td>
+            <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=$laba_harga;  ?></h1></td>
           </tr>
         </table>
-        <p class="card-text"><div class="pembelian"><i class="fas fa-box"></i></div></p>
+        <p class="card-text"><div class="pembelian"><i class="fas fa-money-bill"></i></div></p>
       </div>
       </div>
 
@@ -114,7 +116,7 @@
   <div class="col-md-4">
 
     <div class="card mb-3" style="max-width: 24rem;">
-    <div class="card-header bg-danger text-white"><h4>Total Transaksi</h4></div>
+    <div class="card-header bg-danger text-white"><h4>Total Transaksi <?php echo $tgl=date('M-Y'); ?></h4></div>
     <div class="card-body card-body-custom">
       <table>
         <tr>
@@ -134,19 +136,19 @@
   <div class="col-md-4">
 
     <div class="card mb-3" style="max-width: 24rem;">
-    <div class="card-header bg-primary text-white"><h4>Total Posting</h4></div>
+    <div class="card-header bg-warning text-white"><h4>Total Produk</h4></div>
     <div class="card-body card-body-custom">
       <table>
         <tr>
           <?php
           global $conn;
-          $hasil = mysqli_query ($conn,"SELECT * FROM news");
-          $news = mysqli_num_rows($hasil);
+          $hasil = mysqli_query ($conn,"SELECT * FROM master_barang");
+          $barang = mysqli_num_rows($hasil);
           ?>
-          <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$news; ?>" data-count-speed="80">Rp.0000</h1></td>
+          <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$barang; ?>" data-count-speed="80"></h1></td>
         </tr>
       </table>
-      <p class="card-text"><div class="pembelian"><i class="fas fa-newspaper"></i></div></p>
+      <p class="card-text"><div class="pembelian"><i class="fas fa-box"></i></div></p>
     </div>
     </div>
 
@@ -397,5 +399,6 @@ var myChart = new Chart(ctx, {
 $('.number-counter').countTo();
 
 </script>
+<?php include'footer.php';?>
 </body>
 </html>

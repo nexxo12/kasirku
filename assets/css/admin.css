@@ -61,7 +61,7 @@ a.dropdown-item{
   opacity: 0.4;
 }
 .card-body-custom{
-  background-image: url(../img/dasboard-img.jpg);
+  background-image: url(../../img/dasboard-img.jpg);
   background-size: 100%;
 }
 

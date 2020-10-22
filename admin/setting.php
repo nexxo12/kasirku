@@ -140,19 +140,5 @@
 
 <br><br><br><br><br>
 
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#keyword').on('keyup', function(){
-      $('#isi-barang').load('detail-barangPemb.php?keyword=' + $('#keyword').val())
-    })
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#tabel-data').DataTable();
-});
-</script>
-
 </body>
 </html>
