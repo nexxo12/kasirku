@@ -25,7 +25,7 @@
   <tr>
     <td rowspan="3" width="10%"><img src="../img/logo.png" alt="" style="height:130px; width:160px;"></td>
     <td width="33%">
-      <h3>VSComputer Online</h3>
+      <h3>VSComputer</h3>
       <i class="fas fa-store mr-1"></i>tokopedia.com/vinoriousstore
     </td>
     <td></td>

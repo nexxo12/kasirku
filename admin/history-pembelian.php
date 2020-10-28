@@ -76,7 +76,7 @@
                   echo "
                       <script>
                       alert('Data Berhasil Dihapus!!');
-                      document.location.href = 'pembelian.php';
+                      document.location.href = 'history-pembelian.php';
                       </script>
                   ";
 

@@ -133,6 +133,19 @@ textarea {
   margin-top: -3.3%;
 }
 
+.card-historypj{
+  width: 50%;
+  position: absolute;
+  left: 24%;
+  top: 30%;
+  -webkit-box-shadow: 1px 5px 21px 0px #000000;
+  box-shadow: 1px 5px 21px 0px #000000;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
 
 
 @media only screen and (max-width: 600px) {

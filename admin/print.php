@@ -25,7 +25,7 @@
     <tr>
       <td rowspan="3" width="10%"><img src="../img/logo.png" alt="" style="height:130px; width:160px;"></td>
       <td width="33%">
-        <h3>VSComputer Online</h3>
+        <h3>VSComputer</h3>
         <i class="fas fa-store mr-1"></i>tokopedia.com/vinoriousstore
       </td>
       <td></td>
@@ -83,8 +83,9 @@
               $total_beli = number_format($jumlaht["jumlah_beli"]);
         } ?>
         <tr>
-          <td colspan="2" rowspan="4" class="bg-light"><h5>Catatan : </h5><p>- Garansi tidak berlaku apabila terjadi "Human Error"<br>
-                                - Barang yang dibeli tidak dapat dikembalikan/ditukar</td>
+          <td colspan="2" rowspan="4" class="bg-light"><h5>Catatan : </h5><ul><li>Garansi tidak berlaku apabila terjadi "Human Error"</li>
+                                <li>Barang yang dibeli tidak dapat dikembalikan/ditukar (kecuali ada perjanjian)</li>
+                                <li>Claim garansi silahkan hubungi opsi yang tertera diatas</li></ul></td>
           <tr>
             <td height="20%"><p style="text-align:right;">Diskon Rp. </p></td>
             <td></td>

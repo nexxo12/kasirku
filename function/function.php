@@ -353,6 +353,18 @@ function editgaransi($data){// value $data diterima berupa $_POST
 
 }
 
+function editinvpj($data){// value $data diterima berupa $_POST
+  global $conn;
+  $inv = $data["inv_pj"];
+  $invol = $data["inv_ol"];
+  $minongkir = $data["min_ongkir"];
+  $query = "UPDATE inv_penjualan SET inv_ol = '$invol', ongkir = '$minongkir' WHERE id_inv = '$inv'";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
 
 function caribarang($cari){
 $query = "SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%' OR KATEGORI LIKE '%$cari%'";

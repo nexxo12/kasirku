@@ -51,7 +51,7 @@ $tgl_end = $_GET["end"];
       <?php $no++; endforeach; ?>
       <tfoot class="text-center">
         <tr>
-          <td colspan="3"><h5>Grand Total</h5></td>
+          <td colspan="3"><div style="float:right;"><strong>Subtotal</strong></div></td>
           <td><?php
             $data_laporan = tampil_data("SELECT SUM(JUMLAH_BELI) as qty FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_start' AND '$tgl_end'");
             foreach ($data_laporan as $qty) {
@@ -95,6 +95,24 @@ $tgl_end = $_GET["end"];
               }
             ?>
           </td>
+        </tr>
+        <tr>
+          <td colspan="7"><div style="float:right;">Selisih ongkir<div></td>
+            <td><?php
+              $data_ongkir = tampil_data("SELECT SUM(ongkir) as minogkir FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_start' AND '$tgl_end'");
+              foreach ($data_ongkir as $ongkir) {
+                    $ongkir_harga = $ongkir["minogkir"];
+                    echo "<strong>".number_format($ongkir_harga);
+              }
+            ?></td>
+        </tr>
+        <tr>
+          <td colspan="7"><div style="float:right;"><strong>Total</strong><div></td>
+            <td><?php
+              $total_laba = $laba_harga - $ongkir_harga;
+              echo "<strong>".number_format($total_laba);
+             ?>
+           </td>
         </tr>
       </tfoot>
     </table>

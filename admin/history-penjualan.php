@@ -40,14 +40,17 @@
     <div class="card">
       <h5 class="card-header">History Penjualan</h5>
     <div class="card-body">
+      <div style="overflow-x:auto;">
       <table class="table table-bordered table-responsive-sm" id="tabel-data">
         <thead class="thead-dark ">
           <tr>
-            <th scope="col" width="12%" class="text-center">Invoice</th>
-            <th scope="col" width="">Nama Barang</th>
+            <th scope="col" width="" class="text-center">Invoice</th>
+            <th scope="col" width="" class="text-center">Invoice online</th>
+            <th scope="col" width="" class="text-center">Nama Barang</th>
             <th scope="col" width="15%" class="text-center">Total Transaksi</th>
-            <th scope="col" width="15%" class="text-center">Tanggal Transaksi</th>
-            <th scope="col" width="16%" class="text-center">Aksi</th>
+            <th scope="col" width="" class="text-center">Tanggal</th>
+            <th scope="col" width="12%" class="text-center">Min ongkir</th>
+            <th scope="col" width="" class="text-center">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -55,20 +58,77 @@
           <?php foreach ($data_inv as $inv) :?>
           <tr>
             <td align="center"><?=$inv["id_inv"]; ?></td>
+            <td><?=$inv["inv_ol"]; ?></td>
             <td><?=$inv["BARANG"]; ?></td>
             <td align="center">Rp. <?=number_format($inv["GRAND_TOTAL"]); ?></td>
             <td align="center"><?=$inv["TGL_TRX"]; ?></td>
+            <td align="center">Rp. <?=number_format($inv["ongkir"]); ?></td>
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
               <a href="print-view.php?inv=<?=$inv["id_inv"]; ?>" target="_blank"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
+              <a href="?edit=<?=$inv["id_inv"]; ?>"><button class="btn btn-warning" type="submit" name="ubah" value=""><i class="fas fa-edit"></i></button></a>
               <a href="delete-h.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-danger" type="submit" name="delete" value="" onclick="return confirm('Apakah anda yakin ?');"><i class="fas fa-trash"></i></button></a>
             </td>
           </tr>
+
         <?php endforeach; ?>
         </tbody>
       </table>
+    </div>
       <a href="penjualan.php"><button class="btn btn-primary" type="submit" name="kembali" value="" style="margin-left:45%;">Kembali</button></a>
+      <?php
+        if (isset($_GET["edit"])) {
+          $editv = $_GET["edit"];
+          $list_inv = tampil_data("SELECT * FROM inv_penjualan WHERE id_inv = '$editv'")[0];
 
+      ?>
+      <div class="card card-historypj">
+        <h5 class="card-header">Edit log penjualan <?=$editv; ?></h5>
+      <div class="card-body">
+      <form class="" action="" method="POST">
+      <table class="table-group" cellpadding="4" align="center" border="0" width="100%">
+        <tr>
+          <td>
+            <label for="exampleInputEmail1">Invoice online : </label>
+            <input type="text" class="form-control" name="inv_ol" placeholder="" value="<?=$list_inv["inv_ol"];  ?>" autofocus autocomplete="off">
+            <input type="hidden" name="inv_pj" value="<?=$list_inv["id_inv"];  ?>">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="exampleInputEmail1">Selisih ongkir : </label>
+            <input type="number" class="form-control" name="min_ongkir" placeholder="" value="<?=$list_inv["ongkir"];  ?>" autofocus autocomplete="off">
+          </td>
+        </tr>
+      </table>
+      <button class="btn btn-success mt-2 ml-1"  type="submit" name="save"><i class="fas fa-save mr-2"></i>Save</button>
+    </form>
+      <a href="history-penjualan.php"><button class="btn btn-danger mt-2 ml-1" type="submit" name="kembali" value="" style=""><i class="fas fa-arrow-left"></i></button></a>
+    </div>
+    </div>
+      <?php
+        }
+        if (isset($_POST["save"])) {
+          if (editinvpj($_POST) > 0) {
+            echo "<script language=\"javascript\">
+            swal({
+                  title: \"Berhasil!\",
+                  text: \"Data log berhasil ditambahkan!\",
+                  icon: \"success\",
+                  button: \"OK\",
+                }).then((oke) => {
+                  document.location.href = 'history-penjualan.php';
+                  });;
+
+            </script>";
+
+          }
+
+          else {
+            echo mysqli_error($conn);
+          }
+        }
+      ?>
     </div> <!-- end card body -->
   </div> <!-- end card -->
 
@@ -92,7 +152,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#tabel-data').DataTable();
+    $('#tabel-data').DataTable({
+      "scrollX": true
+    });
 });
 </script>
 </body>

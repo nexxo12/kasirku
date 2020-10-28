@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 09:56 AM
+-- Generation Time: Oct 28, 2020 at 06:49 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -43,8 +43,8 @@ CREATE TABLE `garansi` (
 INSERT INTO `garansi` (`ID_GARANSI`, `INV_PENJUALAN`, `ID_BARANG`, `TGL_BELI`, `TGL_HABIS`, `STATUS`) VALUES
 (5, 'INV00002', 'BR006', '2020-10-20', '0000-00-00', ''),
 (6, 'INV00003', 'BR004', '2020-10-20', '0000-00-00', ''),
-(7, 'INV00004', 'BR010', '2020-10-20', '0000-00-00', ''),
-(8, 'INV00005', 'BR011', '2020-10-20', '0000-00-00', '');
+(8, 'INV00005', 'BR011', '2020-10-20', '0000-00-00', ''),
+(9, 'INV00006', 'BR010', '2020-10-28', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -56,18 +56,20 @@ CREATE TABLE `inv_penjualan` (
   `id_inv` varchar(100) NOT NULL,
   `TGL_TRX` date DEFAULT NULL,
   `BARANG` varchar(100) DEFAULT NULL,
-  `GRAND_TOTAL` double DEFAULT NULL
+  `GRAND_TOTAL` double DEFAULT NULL,
+  `inv_ol` varchar(100) DEFAULT NULL,
+  `ongkir` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `inv_penjualan`
 --
 
-INSERT INTO `inv_penjualan` (`id_inv`, `TGL_TRX`, `BARANG`, `GRAND_TOTAL`) VALUES
-('INV00002', '2020-10-20', '\r\nIntel Core i3 9100F 3.6Ghz Up To 4.2Ghz Box Coffee Lake', 5600000),
-('INV00003', '2020-10-20', '\r\nSeasonic S12III-500 80+ Bronze', 6000000),
-('INV00004', '2020-10-20', '\r\nPATRIOT VIPER ELITE DDR4 8GB (2x4GB) 2666Mhz', 7000000),
-('INV00005', '2020-10-20', '\r\nECS H310CHS-M7 LGA 1151', 4250000);
+INSERT INTO `inv_penjualan` (`id_inv`, `TGL_TRX`, `BARANG`, `GRAND_TOTAL`, `inv_ol`, `ongkir`) VALUES
+('INV00002', '2020-10-20', '\r\nIntel Core i3 9100F 3.6Ghz Up To 4.2Ghz Box Coffee Lake', 5600000, 'INV/20201025/XX/X/660118966	', 2000),
+('INV00003', '2020-10-20', '\r\nSeasonic S12III-500 80+ Bronze', 6000000, 'INV/20201025/XX/X/660118966', 20000),
+('INV00005', '2020-10-20', '\r\nECS H310CHS-M7 LGA 1151', 4250000, 'INV/20201025/XX/X/660118966', 8000),
+('INV00006', '2020-10-28', '\r\nPATRIOT VIPER ELITE DDR4 8GB (2x4GB) 2666Mhz', 7000000, '', 0);
 
 -- --------------------------------------------------------
 
@@ -97,8 +99,7 @@ INSERT INTO `kategori` (`ID_KATEGORI`, `KATEGORI`) VALUES
 (10, 'SSD'),
 (11, 'Mouse'),
 (12, 'Speaker'),
-(15, 'Software'),
-(16, 'Ongkir');
+(15, 'Software');
 
 -- --------------------------------------------------------
 
@@ -261,7 +262,6 @@ INSERT INTO `pembelian_barang` (`ID_BELI`, `ID_SUPP`, `ID_BARANG`, `ID_LOGIN`, `
 ('BL006', 20201, 'BR005', 1, 3, 'unit', 2000000, '2020-06-02'),
 ('BL007', 20205, 'BR013', 1, 4, 'unit', 295000, '2020-06-02'),
 ('BL008', 20205, 'BR004', 3, 2, 'unit', 550000, '2020-06-15'),
-('BL009', 20205, 'BR004', 3, 1, 'unit', 560000, '2020-06-15'),
 ('BL010', 20205, 'BR017', 2, 5, 'unit', 670000, '2020-06-18'),
 ('BL011', 20205, 'BR015', 3, 10, 'unit', 300000, '2020-06-18'),
 ('BL012', 20203, 'BR011', 3, 10, 'unit', 800000, '2020-06-18'),
@@ -306,8 +306,8 @@ CREATE TABLE `penjualan` (
 INSERT INTO `penjualan` (`ID_PENJUALAN`, `INV_PENJUALAN`, `ID_BARANG`, `ID_PELANGGAN`, `ID_LOGIN`, `TANGGAL_TRANSAKSI`, `JUMLAH_BELI`, `HARGA_AWAL`, `HARGA_JUALPJ`, `TOTAL_HARGA`, `LABAPJ`) VALUES
 (5, 'INV00002', 'BR006', '1', 3, '2020-10-20', 5, 1000000, 1120000, 5600000, 600000),
 (6, 'INV00003', 'BR004', '1', 1, '2020-10-20', 10, 560000, 600000, 6000000, 400000),
-(7, 'INV00004', 'BR010', '1', 1, '2020-10-20', 10, 600000, 700000, 7000000, 1000000),
-(8, 'INV00005', 'BR011', '1', 1, '2020-10-20', 5, 800000, 850000, 4250000, 250000);
+(8, 'INV00005', 'BR011', '1', 1, '2020-10-20', 5, 800000, 850000, 4250000, 250000),
+(9, 'INV00006', 'BR010', '1', 1, '2020-10-28', 10, 600000, 700000, 7000000, 1000000);
 
 --
 -- Triggers `penjualan`
@@ -483,7 +483,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `ID_KATEGORI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID_KATEGORI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `produk_terjual`

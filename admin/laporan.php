@@ -94,7 +94,7 @@
           <?php $no++; endforeach; ?>
           <tfoot class="text-center">
             <tr>
-              <td colspan="3"><h5>Grand Total</h5></td>
+              <td colspan="3"><div style="float:right;"><strong>Subtotal</strong></div></td>
               <td><?php
                 $tgl_awal = $_POST["tgl_awal"];
                 $tgl_akhir = $_POST["tgl_akhir"];
@@ -140,6 +140,24 @@
                   }
                 ?>
               </td>
+            </tr>
+            <tr>
+              <td colspan="7"><div style="float:right;">Selisih ongkir<div></td>
+                <td><?php
+                  $data_ongkir = tampil_data("SELECT SUM(ongkir) as minogkir FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_ongkir as $ongkir) {
+                        $ongkir_harga = $ongkir["minogkir"];
+                        echo "<strong>".number_format($ongkir_harga);
+                  }
+                ?></td>
+            </tr>
+            <tr>
+              <td colspan="7"><div style="float:right;"><strong>Total</strong><div></td>
+                <td><?php
+                  $total_laba = $laba_harga - $ongkir_harga;
+                  echo "<strong>".number_format($total_laba);
+                 ?>
+               </td>
             </tr>
           </tfoot>
         </table>
