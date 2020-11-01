@@ -133,11 +133,13 @@
               </td>
               <td>
                 <?php
-                  $data_laporan = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
-                  foreach ($data_laporan as $laba) {
-                        $laba_harga = $laba["laba"];
-                        echo "<strong>".number_format($laba_harga);
-                  }
+                $laba = $jual_harga - $awal_harga;
+                echo "<strong>".number_format($laba);
+                  // $data_laporan = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  // foreach ($data_laporan as $laba) {
+                  //       $laba_harga = $laba["laba"];
+                  //       echo "<strong>".number_format($laba_harga);
+                  // }
                 ?>
               </td>
             </tr>
@@ -154,7 +156,7 @@
             <tr>
               <td colspan="7"><div style="float:right;"><strong>Total</strong><div></td>
                 <td><?php
-                  $total_laba = $laba_harga - $ongkir_harga;
+                  $total_laba = $laba - $ongkir_harga;
                   echo "<strong>".number_format($total_laba);
                  ?>
                </td>
