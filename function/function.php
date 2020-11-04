@@ -2,7 +2,7 @@
 <?php
 //untuk konek database
   date_default_timezone_set('Asia/Jakarta');
- $conn= mysqli_connect ("localhost","root","","vsstore");
+ $conn= mysqli_connect ("localhost","root","","vstes");
  if($conn){
    echo "";
  }
@@ -177,6 +177,18 @@ function tambahdata($data){
     $query = "INSERT INTO master_barang VALUES ('$id_barang[$i]','$kategori[$i]','$nama_barang[$i]','','$satuan[$i]','$harga[$i]','') ";
     $hasil = mysqli_query ($conn,$query);
   }
+}
+
+function tambahdata2($data){
+  global $conn;
+  $id_barang = $data["id_barang"];//data diterima berupa array / banyak data dengan format $POST[id_barang]
+  $nama_barang = $data["nama_barang"];
+  $kategori = $data["kategori"];
+  $satuan = $data["satuan"];
+  $harga = $data["harga"];
+  $query = "INSERT INTO master_barang VALUES ('$id_barang','$kategori','$nama_barang','','$satuan','$harga','') ";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
 }
 
 
