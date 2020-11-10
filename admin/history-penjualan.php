@@ -40,17 +40,19 @@
     <div class="card">
       <h5 class="card-header">History Penjualan</h5>
     <div class="card-body">
-      <div style="overflow-x:auto;">
+
       <table class="table table-bordered table-responsive-sm" id="tabel-data">
         <thead class="thead-dark ">
           <tr>
             <th scope="col" width="" class="text-center">Invoice</th>
-            <th scope="col" width="" class="text-center">Invoice online</th>
+            <th scope="col" width="5%" class="text-center">Invoice online</th>
             <th scope="col" width="" class="text-center">Nama Barang</th>
-            <th scope="col" width="15%" class="text-center">Total Transaksi</th>
+            <th scope="col" width="" class="text-center">Total Transaksi</th>
             <th scope="col" width="" class="text-center">Tanggal</th>
-            <th scope="col" width="12%" class="text-center">Min ongkir</th>
-            <th scope="col" width="" class="text-center">Aksi</th>
+            <th scope="col" width="" class="text-center">- ongkir</th>
+            <th scope="col" width="" class="text-center">+ ongkir</th>
+            <th scope="col" width="" class="text-center">Pot 1%</th>
+            <th scope="col" width="10%" class="text-center">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +65,8 @@
             <td align="center">Rp. <?=number_format($inv["GRAND_TOTAL"]); ?></td>
             <td align="center"><?=$inv["TGL_TRX"]; ?></td>
             <td align="center">Rp. <?=number_format($inv["ongkir"]); ?></td>
+            <td align="center">Rp. <?=number_format($inv["laba_ongkir"]); ?></td>
+            <td align="center">Rp. <?=number_format($inv["potongan"]); ?></td>
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
               <a href="print-view.php?inv=<?=$inv["id_inv"]; ?>" target="_blank"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
@@ -74,7 +78,7 @@
         <?php endforeach; ?>
         </tbody>
       </table>
-    </div>
+
       <a href="penjualan.php"><button class="btn btn-primary" type="submit" name="kembali" value="" style="margin-left:45%;">Kembali</button></a>
       <?php
         if (isset($_GET["edit"])) {
@@ -89,6 +93,12 @@
       <table class="table-group" cellpadding="4" align="center" border="0" width="100%">
         <tr>
           <td>
+            <label for="exampleInputEmail1">Nama Barang : </label>
+            <input type="text" class="form-control" name="barang" placeholder="" value="<?=$list_inv["BARANG"];  ?>" autofocus autocomplete="off">
+          </td>
+        </tr>
+        <tr>
+          <td>
             <label for="exampleInputEmail1">Invoice online : </label>
             <input type="text" class="form-control" name="inv_ol" placeholder="" value="<?=$list_inv["inv_ol"];  ?>" autofocus autocomplete="off">
             <input type="hidden" name="inv_pj" value="<?=$list_inv["id_inv"];  ?>">
@@ -98,6 +108,18 @@
           <td>
             <label for="exampleInputEmail1">Selisih ongkir : </label>
             <input type="number" class="form-control" name="min_ongkir" placeholder="" value="<?=$list_inv["ongkir"];  ?>" autofocus autocomplete="off">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="exampleInputEmail1">Lebih ongkir : </label>
+            <input type="number" class="form-control" name="plus_ongkir" placeholder="" value="<?=$list_inv["laba_ongkir"];  ?>" autofocus autocomplete="off">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="exampleInputEmail1">Pot 1% : </label>
+            <input type="number" class="form-control" name="potongan" placeholder="" value="<?=$list_inv["potongan"];  ?>" autofocus autocomplete="off">
           </td>
         </tr>
       </table>

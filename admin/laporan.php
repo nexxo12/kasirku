@@ -144,6 +144,16 @@
               </td>
             </tr>
             <tr>
+              <td colspan="7"><div style="float:right;">Lebih ongkir<div></td>
+                <td><?php
+                  $data_ongkir = tampil_data("SELECT SUM(laba_ongkir) as plusogkir FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_ongkir as $plusongkir) {
+                        $lebih_ongkir = $plusongkir["plusogkir"];
+                        echo "<strong>".number_format($lebih_ongkir);
+                  }
+                ?></td>
+            </tr>
+            <tr>
               <td colspan="7"><div style="float:right;">Selisih ongkir<div></td>
                 <td><?php
                   $data_ongkir = tampil_data("SELECT SUM(ongkir) as minogkir FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_awal' AND '$tgl_akhir'");
@@ -154,9 +164,19 @@
                 ?></td>
             </tr>
             <tr>
+              <td colspan="7"><div style="float:right;">Pot 1% Marketplace<div></td>
+                <td><?php
+                  $data_potongan = tampil_data("SELECT SUM(potongan) as pot FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+                  foreach ($data_potongan as $potongan) {
+                        $potongan_harga = $potongan["pot"];
+                        echo "<strong>".number_format($potongan_harga);
+                  }
+                ?></td>
+            </tr>
+            <tr>
               <td colspan="7"><div style="float:right;"><strong>Total</strong><div></td>
                 <td><?php
-                  $total_laba = $laba - $ongkir_harga;
+                  $total_laba = $laba + $lebih_ongkir - $ongkir_harga - $potongan_harga;
                   echo "<strong>".number_format($total_laba);
                  ?>
                </td>

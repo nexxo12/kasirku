@@ -79,12 +79,35 @@
           <tr>
             <?php
             $tgl2=date('Y-m');
-            $data_laba = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");
-            foreach ($data_laba as $laba) {
-                  $laba_harga = number_format($laba["laba"]);
+            $data_laporan = tampil_data("SELECT SUM(HARGA_AWAL) as hg_awal FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");
+            foreach ($data_laporan as $awal) {
+                  $awal_harga = $awal["hg_awal"];
             }
-            ?>
-            <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=$laba_harga;  ?></h1></td>
+            $data_laporan2 = tampil_data("SELECT SUM(HARGA_JUALPJ) as hg_jual FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");
+            foreach ($data_laporan2 as $jual) {
+                  $jual_harga = $jual["hg_jual"];
+
+            }
+            $data_ongkir = tampil_data("SELECT SUM(laba_ongkir) as plusogkir FROM inv_penjualan WHERE TGL_TRX LIKE '%$tgl2%'");
+            foreach ($data_ongkir as $plusongkir) {
+                  $lebih_ongkir = $plusongkir["plusogkir"];
+            }
+            $data_ongkir_selisih = tampil_data("SELECT SUM(ongkir) as minogkir FROM inv_penjualan WHERE TGL_TRX LIKE '%$tgl2%'");
+            foreach ($data_ongkir_selisih as $ongkir) {
+                  $ongkir_harga = $ongkir["minogkir"];
+            }
+            $data_potongan = tampil_data("SELECT SUM(potongan) as pot FROM inv_penjualan WHERE TGL_TRX LIKE '%$tgl2%'");
+            foreach ($data_potongan as $potongan) {
+                  $potongan_harga = $potongan["pot"];
+            }
+            $laba = $jual_harga - $awal_harga;
+            $total_laba = $laba + $lebih_ongkir - $ongkir_harga - $potongan_harga;
+            // $data_laba = tampil_data("SELECT SUM(LABAPJ) as laba FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");
+            // foreach ($data_laba as $laba) {
+            //       $laba_harga = number_format($laba["laba"]);
+            // }
+            // ?>
+            <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=number_format($total_laba);  ?></h1></td>
           </tr>
         </table>
         <p class="card-text"><div class="pembelian"><i class="fas fa-money-bill"></i></div></p>
@@ -97,19 +120,20 @@
   <div class="row">
   <div class="col-md-4">
     <div class="card mb-3" style="max-width: 24rem;">
-    <div class="card-header bg-warning text-white"><h4>Total Supplier</h4></div>
+    <div class="card-header bg-warning text-white"><h4>Stok Modal Aktif</h4></div>
     <div class="card-body card-body-custom">
       <table>
         <tr>
           <?php
-          global $conn;
-          $hasil = mysqli_query ($conn,"SELECT * FROM supplier");
-          $supp = mysqli_num_rows($hasil);
+          $data_GTotal = tampil_data("SELECT SUM(G_TOTAL) as grantotal FROM master_barang INNER JOIN pembelian_barang ON master_barang.ID_BARANG=pembelian_barang.ID_BARANG WHERE master_barang.STOK>0");
+          foreach ($data_GTotal as $total) {
+                $GTotal_Buy = $total["grantotal"];
+          }
           ?>
-          <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$supp; ?>" data-count-speed="80"></h1></td>
+          <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=number_format($GTotal_Buy);  ?></h1></td>
         </tr>
       </table>
-      <p class="card-text"><div class="pembelian"><i class="fas fa-truck"></i></div></p>
+      <p class="card-text"><div class="pembelian"><i class="fas fa-boxes"></i></div></p>
     </div>
     </div>
   </div> <!-- end col md -->
@@ -136,7 +160,7 @@
   <div class="col-md-4">
 
     <div class="card mb-3" style="max-width: 24rem;">
-    <div class="card-header bg-warning text-white"><h4>Total Produk</h4></div>
+    <div class="card-header bg-warning text-white"><h4>Total Master Barang</h4></div>
     <div class="card-body card-body-custom">
       <table>
         <tr>
@@ -153,6 +177,48 @@
     </div>
 
   </div> <!-- end col md -->
+</div> <!-- end row -->
+<br>
+<div class="row">
+<div class="col-md-4">
+  <div class="card mb-3" style="max-width: 24rem;">
+  <div class="card-header bg-primary text-white"><h4>Total Stok Aktif</h4></div>
+  <div class="card-body card-body-custom">
+    <table>
+      <tr>
+        <?php
+        // $data_GTotal = tampil_data("SELECT SUM(G_TOTAL) as grantotal FROM master_barang INNER JOIN pembelian_barang ON master_barang.ID_BARANG=pembelian_barang.ID_BARANG WHERE master_barang.STOK>0");
+        // foreach ($data_GTotal as $total) {
+        //       $GTotal_Buy = $total["grantotal"];
+        // }
+        ?>
+        <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">coming soon!</h1></td>
+      </tr>
+    </table>
+    <p class="card-text"><div class="pembelian"><i class="fas fa-box"></i></div></p>
+  </div>
+  </div>
+</div> <!-- end col md -->
+<div class="col-md-4">
+
+  <div class="card mb-3" style="max-width: 24rem;">
+  <div class="card-header bg-danger text-white"><h4>Total Seluruh Transaksi</h4></div>
+  <div class="card-body card-body-custom">
+    <table>
+      <tr>
+        <?php
+        // global $conn;
+        // $hasil = mysqli_query ($conn,"SELECT * FROM inv_penjualan");
+        // $cust = mysqli_num_rows($hasil);
+        ?>
+        <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="" data-count-speed="80"></h1></td>
+      </tr>
+    </table>
+    <p class="card-text"><div class="pembelian"><i class="fas fa-handshake"></i></div></p>
+  </div>
+  </div>
+
+</div> <!-- end col md -->
 </div> <!-- end row -->
 
 <br><br>

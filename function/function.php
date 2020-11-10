@@ -368,9 +368,12 @@ function editgaransi($data){// value $data diterima berupa $_POST
 function editinvpj($data){// value $data diterima berupa $_POST
   global $conn;
   $inv = $data["inv_pj"];
+  $baranginv = $data["barang"];
   $invol = $data["inv_ol"];
   $minongkir = $data["min_ongkir"];
-  $query = "UPDATE inv_penjualan SET inv_ol = '$invol', ongkir = '$minongkir' WHERE id_inv = '$inv'";
+  $labaongkir = $data["plus_ongkir"];
+  $potongan = $data["potongan"];
+  $query = "UPDATE inv_penjualan SET BARANG = '$baranginv', inv_ol = '$invol', ongkir = '$minongkir', laba_ongkir = '$labaongkir', potongan = '$potongan' WHERE id_inv = '$inv'";
   $hasil = mysqli_query ($conn,$query);
   return $hasil;
 
