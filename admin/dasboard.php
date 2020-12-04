@@ -40,7 +40,8 @@
       <div class="card-body card-body-custom">
         <table>
           <tr>
-            <?php $sum_total = tampil_data("SELECT SUM(HARGA_BELI) AS jumlah FROM pembelian_barang");?>
+            <?php $tgl2 = date('Y-m'); ?>
+            <?php $sum_total = tampil_data("SELECT SUM(HARGA_BELI) AS jumlah FROM pembelian_barang WHERE TGL_BELI LIKE '%$tgl2%'");?>
             <?php foreach ($sum_total as $jumlah) {
                   $total_harga = number_format($jumlah["jumlah"]);
             } ?>
@@ -58,7 +59,7 @@
       <div class="card-body card-body-custom">
         <table>
           <tr>
-            <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM penjualan");?>
+            <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM penjualan WHERE TANGGAL_TRANSAKSI LIKE '%$tgl2%'");?>
             <?php foreach ($sum_total as $jumlah) {
                   $total_harga = number_format($jumlah["jumlah"]);
             } ?>
@@ -108,7 +109,14 @@
             // }
             // ?>
             <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=number_format($total_laba);  ?></h1></td>
+
           </tr>
+          <div class="cashback"><h6 style="font-weight:bold;">Cashback (Rp. )</h6></div>
+          <?php
+          $tgl3=date('Y-m-1');
+          $tgl_skrng = date('Y-m-d');
+          ?>
+          <div class="detail-log"><a href="laporan.php?start=<?=$tgl3; ?>&current=<?=$tgl_skrng; ?>">Detail &raquo</a></div>
         </table>
         <p class="card-text"><div class="pembelian"><i class="fas fa-money-bill"></i></div></p>
       </div>
@@ -146,7 +154,7 @@
         <tr>
           <?php
           global $conn;
-          $hasil = mysqli_query ($conn,"SELECT * FROM inv_penjualan");
+          $hasil = mysqli_query ($conn,"SELECT * FROM inv_penjualan WHERE TGL_TRX LIKE '%$tgl2%'");
           $cust = mysqli_num_rows($hasil);
           ?>
           <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$cust; ?>" data-count-speed="80"></h1></td>
@@ -187,12 +195,11 @@
     <table>
       <tr>
         <?php
-        // $data_GTotal = tampil_data("SELECT SUM(G_TOTAL) as grantotal FROM master_barang INNER JOIN pembelian_barang ON master_barang.ID_BARANG=pembelian_barang.ID_BARANG WHERE master_barang.STOK>0");
-        // foreach ($data_GTotal as $total) {
-        //       $GTotal_Buy = $total["grantotal"];
-        // }
+        global $conn;
+        $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE STOK > 0");
+        $barang_aktif = mysqli_num_rows($hasil);
         ?>
-        <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">coming soon!</h1></td>
+        <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$barang_aktif; ?>" data-count-speed="80"></h1></td>
       </tr>
     </table>
     <p class="card-text"><div class="pembelian"><i class="fas fa-box"></i></div></p>
@@ -207,11 +214,11 @@
     <table>
       <tr>
         <?php
-        // global $conn;
-        // $hasil = mysqli_query ($conn,"SELECT * FROM inv_penjualan");
-        // $cust = mysqli_num_rows($hasil);
+        global $conn;
+        $hasil = mysqli_query ($conn,"SELECT * FROM inv_penjualan");
+        $total_trx = mysqli_num_rows($hasil);
         ?>
-        <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="" data-count-speed="80"></h1></td>
+        <td><h1 class="card-title number-counter" style="font-weight:bold; margin-top:20px;" data-count-from="0" data-count-to="<?=$total_trx; ?>" data-count-speed="80"></h1></td>
       </tr>
     </table>
     <p class="card-text"><div class="pembelian"><i class="fas fa-handshake"></i></div></p>
@@ -279,7 +286,7 @@ var myChart = new Chart(ctx, {
     data: {
         labels: <?=json_encode($data_kat) ?>,
         datasets: [{
-            label: 'Jumlah Stok',
+            label: '',
             data: [
               <?php
               global $conn;
@@ -340,6 +347,31 @@ var myChart = new Chart(ctx, {
               global $conn;
               $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 12");
               echo $speak = mysqli_num_rows($hasil);
+              ?>,
+              <?php
+              global $conn;
+              $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 15");
+              echo $speak = mysqli_num_rows($hasil);
+              ?>,
+              <?php
+              global $conn;
+              $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 16");
+              echo $speak = mysqli_num_rows($hasil);
+              ?>,
+              <?php
+              global $conn;
+              $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 17");
+              echo $speak = mysqli_num_rows($hasil);
+              ?>,
+              <?php
+              global $conn;
+              $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 18");
+              echo $speak = mysqli_num_rows($hasil);
+              ?>,
+              <?php
+              global $conn;
+              $hasil = mysqli_query ($conn,"SELECT * FROM master_barang WHERE ID_KATEGORI = 19");
+              echo $speak = mysqli_num_rows($hasil);
               ?>
             ],
             backgroundColor: [
@@ -348,7 +380,18 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',

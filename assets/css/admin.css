@@ -146,6 +146,17 @@ textarea {
   -o-animation: fadein 2s; /* Opera */
 }
 
+.cashback{
+  position: absolute;
+  top: 77%;
+  margin-left: 5px;
+}
+
+.detail-log{
+  position: absolute;
+  top: 85%;
+  margin-left: 75%;
+}
 
 
 @media only screen and (max-width: 600px) {

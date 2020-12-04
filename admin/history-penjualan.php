@@ -45,13 +45,14 @@
         <thead class="thead-dark ">
           <tr>
             <th scope="col" width="" class="text-center">Invoice</th>
-            <th scope="col" width="5%" class="text-center">Invoice online</th>
+            <th scope="col" width="" class="text-center">Invoice online</th>
             <th scope="col" width="" class="text-center">Nama Barang</th>
             <th scope="col" width="" class="text-center">Total Transaksi</th>
             <th scope="col" width="" class="text-center">Tanggal</th>
             <th scope="col" width="" class="text-center">- ongkir</th>
             <th scope="col" width="" class="text-center">+ ongkir</th>
             <th scope="col" width="" class="text-center">Pot 1%</th>
+            <th scope="col" width="" class="text-center">Cashback</th>
             <th scope="col" width="10%" class="text-center">Aksi</th>
           </tr>
         </thead>
@@ -67,6 +68,7 @@
             <td align="center">Rp. <?=number_format($inv["ongkir"]); ?></td>
             <td align="center">Rp. <?=number_format($inv["laba_ongkir"]); ?></td>
             <td align="center">Rp. <?=number_format($inv["potongan"]); ?></td>
+            <td align="center">soon</td>
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
               <a href="print-view.php?inv=<?=$inv["id_inv"]; ?>" target="_blank"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
