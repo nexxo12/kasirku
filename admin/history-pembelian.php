@@ -46,6 +46,7 @@
               <th scope="col" width="5%">QTY</th>
               <th scope="col" width="6%">Satuan</th>
               <th scope="col" width="13%">Harga</th>
+              <th scope="col" width="13%">Total</th>
               <th scope="col" width="13%">Supplier</th>
               <th scope="col" width="9%">Tanggal</th>
               <th scope="col" width="5%">Aksi</th>
@@ -61,6 +62,7 @@
               <td align="center"><?=$beli["JUMLAH"]; ?></td>
               <td align="center"><?=$beli["SATUAN"]; ?></td>
               <td>Rp. <?=number_format($beli["HARGA_BELI"]); ?></td>
+              <td>Rp. <?=number_format($beli["TOTAL_BELI"]); ?></td>
               <td><?=$beli["NAMA"]; ?></td>
               <td><?=$beli["TGL_BELI"]; ?></td>
               <form class="" action="" method="get">

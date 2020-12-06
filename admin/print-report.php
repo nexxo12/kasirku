@@ -136,6 +136,27 @@ $tgl_end = $_GET["end"];
              ?>
            </td>
         </tr>
+        <tr>
+          <td colspan="7"><div style="float:right;"><strong>Cashback</strong></td>
+          <td>
+            <?php
+            $data_cashback = tampil_data("SELECT SUM(cashback) as cash FROM inv_penjualan WHERE TGL_TRX BETWEEN '$tgl_start' AND '$tgl_end'");
+            foreach ($data_cashback as $total) {
+                  $total_cash = $total["cash"];
+            }
+            echo "<strong>".number_format($total_cash);;
+             ?>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7"><div style="float:right;"><strong>Grand Total</strong></td>
+          <td>
+            <?php
+            $total_all = $total_laba + $total_cash;
+            echo "<strong>".number_format($total_all);;
+             ?>
+          </td>
+        </tr>
 
       </tfoot>
     </table>

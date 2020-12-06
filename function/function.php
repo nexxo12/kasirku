@@ -246,8 +246,9 @@ function tambahdata_beli($data){
       $satuan = $data["satuan"];
       $jumlah = $data["jumlah"];
       $harga = $data["harga"];
+      $total_beli = $jumlah*$harga;
       $tgl = $data["tgl"];
-      $query = "INSERT INTO pembelian_barang VALUES ('$id_beli','$id_supp','$id_barang','$id_login', '$jumlah', '$satuan', '$harga', '$tgl') ";
+      $query = "INSERT INTO pembelian_barang VALUES ('$id_beli','$id_supp','$id_barang','$id_login', '$jumlah', '$satuan', '$harga','$total_beli', '$tgl') ";
       $hasil = mysqli_query ($conn,$query);
       mysqli_error($conn);
       return $hasil;
@@ -373,7 +374,8 @@ function editinvpj($data){// value $data diterima berupa $_POST
   $minongkir = $data["min_ongkir"];
   $labaongkir = $data["plus_ongkir"];
   $potongan = $data["potongan"];
-  $query = "UPDATE inv_penjualan SET BARANG = '$baranginv', inv_ol = '$invol', ongkir = '$minongkir', laba_ongkir = '$labaongkir', potongan = '$potongan' WHERE id_inv = '$inv'";
+  $cashback = $data["cashback"];
+  $query = "UPDATE inv_penjualan SET BARANG = '$baranginv', inv_ol = '$invol', ongkir = '$minongkir', laba_ongkir = '$labaongkir', potongan = '$potongan', cashback = '$cashback' WHERE id_inv = '$inv'";
   $hasil = mysqli_query ($conn,$query);
   return $hasil;
 

@@ -68,7 +68,7 @@
             <td align="center">Rp. <?=number_format($inv["ongkir"]); ?></td>
             <td align="center">Rp. <?=number_format($inv["laba_ongkir"]); ?></td>
             <td align="center">Rp. <?=number_format($inv["potongan"]); ?></td>
-            <td align="center">soon</td>
+            <td align="center">Rp. <?=number_format($inv["cashback"]); ?></td>
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
               <a href="print-view.php?inv=<?=$inv["id_inv"]; ?>" target="_blank"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
@@ -122,6 +122,12 @@
           <td>
             <label for="exampleInputEmail1">Pot 1% : </label>
             <input type="number" class="form-control" name="potongan" placeholder="" value="<?=$list_inv["potongan"];  ?>" autofocus autocomplete="off">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="exampleInputEmail1">Cashback : </label>
+            <input type="number" class="form-control" name="cashback" placeholder="" value="<?=$list_inv["cashback"];  ?>" autofocus autocomplete="off">
           </td>
         </tr>
       </table>

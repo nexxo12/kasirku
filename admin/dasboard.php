@@ -41,7 +41,7 @@
         <table>
           <tr>
             <?php $tgl2 = date('Y-m'); ?>
-            <?php $sum_total = tampil_data("SELECT SUM(HARGA_BELI) AS jumlah FROM pembelian_barang WHERE TGL_BELI LIKE '%$tgl2%'");?>
+            <?php $sum_total = tampil_data("SELECT SUM(TOTAL_BELI) AS jumlah FROM pembelian_barang WHERE TGL_BELI LIKE '%$tgl2%'");?>
             <?php foreach ($sum_total as $jumlah) {
                   $total_harga = number_format($jumlah["jumlah"]);
             } ?>
@@ -111,7 +111,13 @@
             <td><h1 class="card-title" style="font-weight:bold; margin-top:20px;">Rp. <?=number_format($total_laba);  ?></h1></td>
 
           </tr>
-          <div class="cashback"><h6 style="font-weight:bold;">Cashback (Rp. )</h6></div>
+          <?php
+          $data_cashback = tampil_data("SELECT SUM(cashback) as cash FROM inv_penjualan WHERE TGL_TRX LIKE '%$tgl2%'");
+          foreach ($data_cashback as $total) {
+                $total_cash = $total["cash"];
+          }
+          ?>
+          <div class="cashback"><h6 style="font-weight:bold;">Cashback (Rp. <?=number_format($total_cash); ?> )</h6></div>
           <?php
           $tgl3=date('Y-m-1');
           $tgl_skrng = date('Y-m-d');
@@ -133,7 +139,7 @@
       <table>
         <tr>
           <?php
-          $data_GTotal = tampil_data("SELECT SUM(G_TOTAL) as grantotal FROM master_barang INNER JOIN pembelian_barang ON master_barang.ID_BARANG=pembelian_barang.ID_BARANG WHERE master_barang.STOK>0");
+          $data_GTotal = tampil_data("SELECT SUM(G_TOTAL) as grantotal FROM master_barang WHERE STOK>0");
           foreach ($data_GTotal as $total) {
                 $GTotal_Buy = $total["grantotal"];
           }
