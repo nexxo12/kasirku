@@ -45,14 +45,35 @@
 
       <div class="form-input">
         <form class="form-inline" action="" method="post">
-          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_awal" autocomplete="off" required>
+          <?php
+          if (isset($_GET["start"]) && isset($_GET["current"])) {
+
+            $tgl1st = $_GET["start"];
+            $tgl2nd = $_GET["current"];
+          ?>
+          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_awal" value="<?=$tgl1st; ?>" autocomplete="off" required>
           <p class="mr-2" style="margin-top:15px;">s/d</p>
-          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_akhir" autocomplete="off" required>
+          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_akhir" value="<?=$tgl2nd; ?>" autocomplete="off" required>
+          <?php
+
+          }
+          else {
+            $tgl1st = "";
+            $tgl2nd = "";
+          ?>
+          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_awal" value="<?=$tgl1st; ?>" autocomplete="off" required>
+          <p class="mr-2" style="margin-top:15px;">s/d</p>
+          <input class="form-control mr-sm-2 datepicker" type="text" placeholder="yyyy/mm/dd"  name="tgl_akhir" value="<?=$tgl2nd; ?>" autocomplete="off" required>
+          <?php
+          }
+
+           ?>
           <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
         </form>
 
         <br>
         <?php
+
             if (isset($_POST["cari"])) {
 
          ?>
@@ -73,7 +94,8 @@
             </tr>
           </thead>
           <?php
-
+            $tgl_awal = $_POST["tgl_awal"];
+            $tgl_akhir = $_POST["tgl_akhir"];
             $no=1;
             $data_laporan = tampil_data("SELECT * FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG ORDER BY INV_PENJUALAN ASC");
             $data_laporan = carilaporan($_POST);
@@ -96,8 +118,7 @@
             <tr>
               <td colspan="3"><div style="float:right;"><strong>Subtotal</strong></div></td>
               <td><?php
-                $tgl_awal = $_POST["tgl_awal"];
-                $tgl_akhir = $_POST["tgl_akhir"];
+
                 $data_laporan = tampil_data("SELECT SUM(JUMLAH_BELI) as qty FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE penjualan.TANGGAL_TRANSAKSI BETWEEN '$tgl_awal' AND '$tgl_akhir'");
                 foreach ($data_laporan as $qty) {
                       $total_qty = $qty["qty"];
@@ -206,8 +227,9 @@
           </tfoot>
         </table>
         <?php
-          }
+      }   // end if
          ?>
+
          </div>
     </div>
 

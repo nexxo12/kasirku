@@ -41,11 +41,11 @@
       <h5 class="card-header">History Penjualan</h5>
     <div class="card-body">
 
-      <table class="table table-bordered table-responsive-sm" id="tabel-data">
+      <table class="table table-bordered table-responsive-sm" id="tabel-data" width="120%">
         <thead class="thead-dark ">
           <tr>
             <th scope="col" width="" class="text-center">Invoice</th>
-            <th scope="col" width="" class="text-center">Invoice online</th>
+            <th scope="col" width="10px" class="text-center">Invoice online</th>
             <th scope="col" width="" class="text-center">Nama Barang</th>
             <th scope="col" width="" class="text-center">Total Transaksi</th>
             <th scope="col" width="" class="text-center">Tanggal</th>
@@ -183,6 +183,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $('#tabel-data').DataTable({
+      "scrollY": 600,
       "scrollX": true
     });
 });

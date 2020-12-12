@@ -119,7 +119,7 @@
           ?>
           <div class="cashback"><h6 style="font-weight:bold;">Cashback (Rp. <?=number_format($total_cash); ?> )</h6></div>
           <?php
-          $tgl3=date('Y-m-1');
+          $tgl3=date('Y-m-01');
           $tgl_skrng = date('Y-m-d');
           ?>
           <div class="detail-log"><a href="laporan.php?start=<?=$tgl3; ?>&current=<?=$tgl_skrng; ?>">Detail &raquo</a></div>
