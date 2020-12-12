@@ -1,6 +1,14 @@
 <?php include'header.php';
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Garansi - VSComp</title>
+
+<?php include'header-title.php';  ?>
+<?php include'header-nav.php';?>
 
 <div class="container-fluid custom-container">
   <div class="nav-menu">
