@@ -26,18 +26,18 @@
       <td rowspan="3" width="10%"><img src="../img/logo.png" alt="" style="height:130px; width:160px;"></td>
       <td width="33%">
         <h3>VSComputer</h3>
-        <i class="fas fa-store mr-1"></i>tokopedia.com/vinoriousstore
+        <i class="fab fa-whatsapp mr-2"></i>083-853-525-037
       </td>
       <td></td>
       <td><h5>INVOICE : <?=$inv["INV_PENJUALAN"]; ?></h5><strong><?=$inv["NAMA"]; ?></strong></td>
     </tr>
     <tr>
-      <td><i class="fas fa-store mr-1"></i>bukalapak.com/u/ravinorahman</td>
+      <td><i class="fas fa-phone mr-2"></i>083-853-525-037</td>
       <td></td>
       <td>Alamat : <?=$inv["ALAMAT"]; ?></td>
     </tr>
     <tr>
-      <td><i class="fab fa-whatsapp mr-2"></i>08385-352-5037</td>
+      <td><i class="fas fa-globe mr-2"></i>www.vskomputer.com</td>
       <td></td>
       <td>Hp : <?=$inv["HP"]; ?></td>
     </tr>
@@ -85,7 +85,7 @@
         <tr>
           <td colspan="2" rowspan="4" class="bg-light"><h5>Catatan : </h5><ul><li>Garansi tidak berlaku apabila terjadi "Human Error"</li>
                                 <li>Barang yang dibeli tidak dapat dikembalikan/ditukar (kecuali ada perjanjian)</li>
-                                <li>Claim garansi silahkan hubungi opsi yang tertera diatas</li></ul></td>
+                                <li>Claim garansi silahkan cek di <strong>www.vskomputer.com/garansi.html</strong> dan hubungi nomor yang tertera diatas</li></ul></td>
           <tr>
             <td height="20%"><p style="text-align:right;">Diskon Rp. </p></td>
             <td></td>
@@ -106,10 +106,9 @@
   <tr>
     <td><div style="text-align:center;">Tanda terima</div><br><br><br><hr></td>
     <td width="20%"></td>
-    <td><div style="text-align:center;">Hormat kami</div><br><br><br><hr></td>
+    <td><div style="text-align:center;">Hormat kami</div><img style="padding:10px; position:relative; left:50px; top:5px;" src="../img/ttd.jpg" alt=""><hr></td>
   </tr>
 </table>
-
 </div>
 
 <script type="text/javascript">
