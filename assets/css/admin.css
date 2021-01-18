@@ -37,6 +37,9 @@ a.dropdown-item{
 .form-group > .input-kategori{
   width: 170px;
 }
+.form-group > .nama_brg{
+  width: 500px;
+}
 .input-pj{
   width: 20px;
 }
@@ -174,7 +177,7 @@ textarea {
 
   .history{
     position:absolute;
-    left:67%;
+    left:60%;
     top:1.5%;
   }
 
@@ -211,15 +214,48 @@ textarea {
 
   .btn-tambah{
     position: absolute;
-    right: 45%;
-    bottom: 60%;
+    right: 27%;
+    bottom: 59%;
   }
 
   .kategori{
     position: absolute;
-    left:54%;
-    top:35.9%;
+    left: 73%;
+    bottom: 59%;
   }
+
+  .card-historypj{
+    width: 100%;
+    position: relative;
+    left: -0.8%;
+    top: -720px;
+  }
+
+.form-pencarian{
+  position: relative;
+  left: -23%;
+}
+
+.btn-cari{
+  position: absolute;
+  left: 100%;
+}
+
+.pagination-custom{
+  position: relative;
+  left: 10%;
+}
+
+.add-kategori{
+  width: 70%;
+  position: absolute;
+  left: 17%;
+  top: 55%;
+}
+
+.form-group > .nama_brg{
+  width: 250px;
+}
 
 
 }

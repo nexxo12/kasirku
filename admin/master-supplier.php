@@ -67,7 +67,7 @@
 
         ?>
         <form class="" action="" method="post">
-        <table class="table-group" id="form" cellpadding="4" align="center">
+        <table class="table-group table table-responsive-sm" id="form" cellpadding="4" align="center">
           <tr>
             <td>
               <div class="form-group">
@@ -77,7 +77,7 @@
             </td>
             <td>
               <div class="form-group">
-              <label for="exampleInputEmail1">Nama Supplier</label>
+              <label for="exampleInputEmail1">Supplier</label>
               <input class="form-control" type="text" name="nama_supp" placeholder="">
               </div>
 
@@ -141,12 +141,12 @@
 
 
 
-    <form class="form-inline" style="float:right" action="" method="post">
+    <form class="form-inline form-pencarian" style="float:right" action="" method="post">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" autofocus>
-      <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
+      <button class="btn btn-primary btn-cari" type="submit" name="cari"><i class="fas fa-search"></i></button>
     </form><br><br>
 
-    <table class="table table-bordered ">
+    <table class="table table-bordered table-responsive-sm ">
       <thead class="thead-dark text-center">
         <tr>
           <th scope="col" width="1%">No.</th>

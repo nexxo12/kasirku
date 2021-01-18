@@ -50,7 +50,7 @@
     <div class="card-body">
       <a href="history-penjualan.php"><p class="history">History penjualan &raquo</p></a>
     <form class="penjualan" action="" method="post">
-    <table class="table-group" id="form" cellpadding="3" align="center" width="80%" border="0">
+    <table class="table-group table-responsive-sm" id="form" cellpadding="3" align="center" width="80%" border="0">
       <tr>
         <?php $autonumber_db = autonumber_inv("id_inv"); ?>
 
@@ -112,7 +112,7 @@
       </tr>
   </table>
   <br>
-  <table class="table-group" align="center" border="0" width="70%">
+  <table class="table-group table-responsive-sm" align="center" border="0" width="70%">
     <tr>
       <td width="40%">
         <div class="form-group">
@@ -135,7 +135,7 @@
       <td>
 
       <div class="form-group">
-      <label for="exampleInputEmail1"><b>Harga Jual :</b></label>
+      <label for="exampleInputEmail1"><b>Hg Jual :</b></label>
       <input class="form-control" type="number" name="harga_jual"  placeholder="" value="">
       </div>
       </td>

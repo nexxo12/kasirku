@@ -54,7 +54,7 @@
          ?>
 
         <form class="" action="" method="post">
-        <table class="table-group" id="form" cellpadding="4" align="center">
+        <table class="table-group table-group table table-responsive-sm" id="form" cellpadding="4" align="center">
           <tr>
             <td width="10%">
               <div class="form-group">
@@ -62,10 +62,10 @@
               <input class="form-control" type="text" name="id_barang" value="<?= $barang["ID_BARANG"]; ?>" readonly>
               </div>
             </td>
-            <td width="48%">
-              <div class="form-group">
+            <td width="">
+              <div class="form-group nama_barang">
               <label for="exampleInputEmail1">Nama barang</label>
-              <input class="form-control" type="text" name="nama_barang" value="<?= $barang["NAMA_BARANG"]; ?>">
+              <input class="form-control nama_brg" type="text" name="nama_barang" value="<?= $barang["NAMA_BARANG"]; ?>">
               </div>
 
             </td>
@@ -121,11 +121,11 @@
       ?>
 
 
-    <form class="form-inline" style="float:right" action="#">
+    <form class="form-inline form-pencarian" style="float:right" action="#">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+      <button class="btn btn-primary btn-cari" type="submit"><i class="fas fa-search"></i></button>
     </form><br><br>
-    <table class="table table-bordered ">
+    <table class="table table-bordered table-responsive-sm">
       <thead class="thead-dark">
         <tr>
           <th scope="col" width="5%">No.</th>

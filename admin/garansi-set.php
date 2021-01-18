@@ -54,7 +54,7 @@
        ?>
 
        <form class="" action="" method="post">
-       <table class="table-group" id="form" cellpadding="4" align="center">
+       <table class="table-group table table-responsive-sm" id="form" cellpadding="4" align="center">
          <tr>
            <td width="10%">
              <div class="form-group">
@@ -136,7 +136,7 @@
        </tr>
      </table>
     <form class="" action="" method="post">
-      <table class="table table-bordered ">
+      <table class="table table-bordered table-responsive-sm">
         <thead class="thead-dark text-center">
           <tr>
             <th scope="col" width="5%">No.</th>

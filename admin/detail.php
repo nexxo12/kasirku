@@ -77,7 +77,7 @@
         </tr>
       </table>
       <br>
-      <table class="table ">
+      <table class="table table-responsive-sm">
         <thead>
           <tr>
             <th scope="col" width="" class="text-center">No.</th>

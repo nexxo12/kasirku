@@ -121,8 +121,8 @@
               for ($i=1; $i <= $jumlah ; $i++) {
 
         ?>
-        <form class="" action="" method="post">
-        <table class="table-group" id="form" cellpadding="4" align="center">
+        <form class="tb_barang" action="" method="post">
+        <table class="table-group table table-responsive-sm " id="form" cellpadding="4" align="center">
           <tr>
             <td width="10%">
               <div class="form-group">
@@ -130,12 +130,11 @@
               <input class="form-control" type="text" name="id_barang[]" value="<?= $autonumber_db++; ?>" readonly>
               </div>
             </td>
-            <td width="48%">
-              <div class="form-group">
+            <td>
+              <div class="form-group nama_barang">
               <label for="exampleInputEmail1">Nama barang</label>
-              <input class="form-control" type="text" name="nama_barang[]" placeholder="Nama barang">
+              <input class="form-control nama_brg" type="text" name="nama_barang[]" placeholder="Nama barang">
               </div>
-
             </td>
             <td>
               <div class="form-group">
@@ -214,9 +213,9 @@
 
 
 
-    <form class="form-inline" style="float:right" action="" method="post">
+    <form class="form-inline form-pencarian" style="float:right" action="" method="post">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" autofocus>
-      <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
+      <button class="btn btn-primary btn-cari" type="submit" name="cari"><i class="fas fa-search"></i></button>
     </form><br><br>
 
     <table class="table table-bordered table-responsive-sm">
@@ -281,7 +280,7 @@
 
     </table>
     <!-- pagenation -->
-    <nav aria-label="Page navigation example">
+    <nav class="pagination-custom" aria-label="Page navigation example">
         <ul class="pagination" style="float:right;">
           <li class="page-item">
             <?php if ($halamanaktif > 1) : ?>

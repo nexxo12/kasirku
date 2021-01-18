@@ -83,7 +83,7 @@
 
       ?>
 
-      <table class="table table-bordered " id="tabel-data">
+      <table class="table table-bordered table-responsive-sm " id="tabel-data">
         <thead class="thead-dark text-center">
           <tr>
             <th scope="col" width="5%">No.</th>
